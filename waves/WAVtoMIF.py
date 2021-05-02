@@ -20,9 +20,9 @@ print("CONTENT")
 print("BEGIN")
 
 for i in range(waveReader.getnframes()):
-    frameValue = waveReader.readframes(1)
     frameAddr = "%08X" % i
-    hexFrame = ''.join(format(x, '02X') for x in frameValue)
+    frameValue = waveReader.readframes(1)
+    hexFrame = ''.join("%02X" % x for x in frameValue)
     print(frameAddr, ":", hexFrame+";")
 
 print("END;")

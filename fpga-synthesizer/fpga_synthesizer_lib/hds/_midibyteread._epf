@@ -1,0 +1,2 @@
+DEFAULT_ARCHITECTURE atom Behavior
+DEFAULT_FILE atom midiByteRead_Behavior.vhd

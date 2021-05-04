@@ -1,0 +1,13 @@
+[ModelSim]
+fpga_synthesizer_lib = $HDS_PROJECT_DIR\fpga_synthesizer_lib\work
+[hdl]
+fpga_synthesizer_lib = $HDS_PROJECT_DIR\fpga_synthesizer_lib\hdl
+[hds]
+fpga_synthesizer_lib = $HDS_PROJECT_DIR\fpga_synthesizer_lib\hds
+[hds_settings]
+default_library = fpga_synthesizer_lib
+version = 2
+[library_type]
+fpga_synthesizer_lib = regular
+[shared]
+others = $HDS_TEAM_HOME/shared.hdp

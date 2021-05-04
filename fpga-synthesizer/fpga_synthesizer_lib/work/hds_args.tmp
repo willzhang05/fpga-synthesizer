@@ -1,0 +1,1 @@
+ -L fpga_synthesizer_lib -l transcript.txt -i -t ns -multisource_delay latest +typdelays fpga_synthesizer_lib.midiByteRead(Behavior)

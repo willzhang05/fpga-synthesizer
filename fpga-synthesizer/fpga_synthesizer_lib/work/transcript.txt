@@ -1,0 +1,49 @@
+# vsim -f hds_args.tmp -foreign "hdsInit C:/MentorGraphics/HDS_2018.2/resources/downstream/modelsim/ModelSim_32Bit.dll" -pli ""C:/MentorGraphics/HDS_2018.2/resources/downstream/modelsim/ModelSim_32Bit.dll"" 
+# Start time: 12:51:55 on May 02,2021
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading fpga_synthesizer_lib.midibyteread(behavior)
+# Loading C:/MentorGraphics/HDS_2018.2/resources/downstream/modelsim/ModelSim_32Bit.dll
+add wave -position insertpoint  \
+sim:/midibyteread/byteIn \
+sim:/midibyteread/clk \
+sim:/midibyteread/rst \
+sim:/midibyteread/midiOut \
+sim:/midibyteread/midiReg \
+sim:/midibyteread/cnt
+force -freeze sim:/midibyteread/byteIn 10000000 0
+force -freeze sim:/midibyteread/clk 1 0, 0 {50 ns} -r 100
+force -freeze sim:/midibyteread/rst 0 0
+run
+# 0
+# 
+force -freeze sim:/midibyteread/byteIn 10010100 0
+run
+# 0
+# 
+force -freeze sim:/midibyteread/byteIn 11100101 0
+run
+# 0
+# 
+run
+# 0
+# 
+force -freeze sim:/midibyteread/byteIn 10000000 0
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+run
+# 0
+# 
+# The connection to HDS has been closed

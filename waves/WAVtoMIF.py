@@ -17,13 +17,13 @@ print("ADDRESS_RADIX =", radix+";")
 print("DATA_RADIX =", radix+";")
 
 print("CONTENT")
-print("BEGIN")
+print("BEGIN\n")
 
 for i in range(waveReader.getnframes()):
-    frameAddr = "%08X" % i
+    frameAddr = "%X" % i
     frameValue = waveReader.readframes(1)
-    hexFrame = ''.join("%02X" % x for x in frameValue)
+    hexFrame = "%02X%02X" % (frameValue[1], frameValue[0])
     print(frameAddr, ":", hexFrame+";")
 
-print("END;")
+print("\nEND;")
 

@@ -1,0 +1,118 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2018  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+# Date created = 15:51:42  May 04, 2021
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		DE2-115Codec_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE115F29C7
+set_global_assignment -name TOP_LEVEL_ENTITY audio_codec
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:51:42  MAY 04, 2021"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name NOMINAL_CORE_SUPPLY_VOLTAGE 1.2V
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name QSYS_FILE pll.qsys
+set_global_assignment -name VHDL_FILE audio_codec.vhd
+set_global_assignment -name VHDL_FILE aud_gen.vhd
+set_global_assignment -name VHDL_FILE i2c.vhd
+set_location_assignment PIN_Y2 -to clock_50
+set_location_assignment PIN_D1 -to AUD_DACDAT
+set_location_assignment PIN_E3 -to AUD_DACLRCK
+set_location_assignment PIN_D2 -to AUD_ADCDAT
+set_location_assignment PIN_C2 -to AUD_ADCLRCK
+set_location_assignment PIN_F2 -to AUD_BCLK
+set_location_assignment PIN_E1 -to AUD_XCK
+set_location_assignment PIN_B7 -to FPGA_I2C_SCLK
+set_location_assignment PIN_A8 -to FPGA_I2C_SDAT
+set_location_assignment PIN_R24 -to key[3]
+set_location_assignment PIN_N21 -to key[2]
+set_location_assignment PIN_M21 -to key[1]
+set_location_assignment PIN_M23 -to key[0]
+set_location_assignment PIN_AB25 -to sw[9]
+set_location_assignment PIN_AC25 -to sw[8]
+set_location_assignment PIN_AB26 -to sw[7]
+set_location_assignment PIN_AD26 -to sw[6]
+set_location_assignment PIN_AC26 -to sw[5]
+set_location_assignment PIN_AB27 -to sw[4]
+set_location_assignment PIN_AD27 -to sw[3]
+set_location_assignment PIN_AC27 -to sw[2]
+set_location_assignment PIN_AC28 -to sw[1]
+set_location_assignment PIN_AB28 -to sw[0]
+set_global_assignment -name VHDL_FILE midiByteRead.vhd
+set_location_assignment PIN_H15 -to FPGA_LED_OUT[23]
+set_location_assignment PIN_G16 -to FPGA_LED_OUT[22]
+set_location_assignment PIN_G15 -to FPGA_LED_OUT[21]
+set_location_assignment PIN_F15 -to FPGA_LED_OUT[20]
+set_location_assignment PIN_H17 -to FPGA_LED_OUT[19]
+set_location_assignment PIN_J16 -to FPGA_LED_OUT[18]
+set_location_assignment PIN_H16 -to FPGA_LED_OUT[17]
+set_location_assignment PIN_J15 -to FPGA_LED_OUT[16]
+set_location_assignment PIN_G17 -to FPGA_LED_OUT[15]
+set_location_assignment PIN_J17 -to FPGA_LED_OUT[14]
+set_location_assignment PIN_H19 -to FPGA_LED_OUT[13]
+set_location_assignment PIN_J19 -to FPGA_LED_OUT[12]
+set_location_assignment PIN_E18 -to FPGA_LED_OUT[11]
+set_location_assignment PIN_F18 -to FPGA_LED_OUT[10]
+set_location_assignment PIN_F21 -to FPGA_LED_OUT[9]
+set_location_assignment PIN_E19 -to FPGA_LED_OUT[8]
+set_location_assignment PIN_F19 -to FPGA_LED_OUT[7]
+set_location_assignment PIN_G19 -to FPGA_LED_OUT[6]
+set_location_assignment PIN_G21 -to FPGA_LED_OUT[5]
+set_location_assignment PIN_G22 -to FPGA_LED_OUT[4]
+set_location_assignment PIN_G20 -to FPGA_LED_OUT[3]
+set_location_assignment PIN_H21 -to FPGA_LED_OUT[2]
+set_location_assignment PIN_E24 -to FPGA_LED_OUT[1]
+set_location_assignment PIN_E25 -to FPGA_LED_OUT[0]
+set_location_assignment PIN_AC22 -to MIDI_IN_CLK
+set_location_assignment PIN_AE21 -to MIDI_IN_RESET
+set_location_assignment PIN_AF21 -to MIDI_IN_DATA[7]
+set_location_assignment PIN_AD21 -to MIDI_IN_DATA[6]
+set_location_assignment PIN_AD15 -to MIDI_IN_DATA[5]
+set_location_assignment PIN_AC19 -to MIDI_IN_DATA[4]
+set_location_assignment PIN_AD19 -to MIDI_IN_DATA[3]
+set_location_assignment PIN_AF24 -to MIDI_IN_DATA[2]
+set_location_assignment PIN_AF25 -to MIDI_IN_DATA[1]
+set_location_assignment PIN_AE22 -to MIDI_IN_DATA[0]
+set_global_assignment -name VERILOG_FILE midiNoteNumberToSampleTicks.v
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

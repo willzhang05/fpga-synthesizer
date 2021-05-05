@@ -1,0 +1,78 @@
+# Copyright (C) 2018  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details.
+
+# Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+# File: D:\DE2-115Codec\DE2-115Codec.csv
+# Generated on: Tue May 04 21:21:25 2021
+
+# Note: The column header names should not be changed if you wish to import this .csv file into the Quartus Prime software.
+
+To,Direction,Location,I/O Bank,VREF Group,Fitter Location,I/O Standard,Reserved,Current Strength,Slew Rate,Differential Pair,Strict Preservation
+AUD_ADCDAT,Input,PIN_D2,1,B1_N0,PIN_D2,2.5 V,,,,,
+AUD_ADCLRCK,Output,PIN_C2,1,B1_N0,PIN_C2,2.5 V,,,,,
+AUD_BCLK,Output,PIN_F2,1,B1_N1,PIN_F2,2.5 V,,,,,
+AUD_DACDAT,Output,PIN_D1,1,B1_N0,PIN_D1,2.5 V,,,,,
+AUD_DACLRCK,Output,PIN_E3,1,B1_N0,PIN_E3,2.5 V,,,,,
+AUD_XCK,Output,PIN_E1,1,B1_N0,PIN_E1,2.5 V,,,,,
+clock_50,Input,PIN_Y2,2,B2_N0,PIN_Y2,2.5 V,,,,,
+FPGA_I2C_SCLK,Output,PIN_B7,8,B8_N1,PIN_B7,2.5 V,,,,,
+FPGA_I2C_SDAT,Bidir,PIN_A8,8,B8_N1,PIN_A8,2.5 V,,,,,
+FPGA_LED_OUT[23],Output,PIN_H15,7,B7_N2,PIN_H15,2.5 V,,,,,
+FPGA_LED_OUT[22],Output,PIN_G16,7,B7_N2,PIN_G16,2.5 V,,,,,
+FPGA_LED_OUT[21],Output,PIN_G15,7,B7_N2,PIN_G15,2.5 V,,,,,
+FPGA_LED_OUT[20],Output,PIN_F15,7,B7_N2,PIN_F15,2.5 V,,,,,
+FPGA_LED_OUT[19],Output,PIN_H17,7,B7_N2,PIN_H17,2.5 V,,,,,
+FPGA_LED_OUT[18],Output,PIN_J16,7,B7_N2,PIN_J16,2.5 V,,,,,
+FPGA_LED_OUT[17],Output,PIN_H16,7,B7_N2,PIN_H16,2.5 V,,,,,
+FPGA_LED_OUT[16],Output,PIN_J15,7,B7_N2,PIN_J15,2.5 V,,,,,
+FPGA_LED_OUT[15],Output,PIN_G17,7,B7_N1,PIN_G17,2.5 V,,,,,
+FPGA_LED_OUT[14],Output,PIN_J17,7,B7_N2,PIN_J17,2.5 V,,,,,
+FPGA_LED_OUT[13],Output,PIN_H19,7,B7_N2,PIN_H19,2.5 V,,,,,
+FPGA_LED_OUT[12],Output,PIN_J19,7,B7_N2,PIN_J19,2.5 V,,,,,
+FPGA_LED_OUT[11],Output,PIN_E18,7,B7_N1,PIN_E18,2.5 V,,,,,
+FPGA_LED_OUT[10],Output,PIN_F18,7,B7_N1,PIN_F18,2.5 V,,,,,
+FPGA_LED_OUT[9],Output,PIN_F21,7,B7_N0,PIN_F21,2.5 V,,,,,
+FPGA_LED_OUT[8],Output,PIN_E19,7,B7_N0,PIN_E19,2.5 V,,,,,
+FPGA_LED_OUT[7],Output,PIN_F19,7,B7_N0,PIN_F19,2.5 V,,,,,
+FPGA_LED_OUT[6],Output,PIN_G19,7,B7_N2,PIN_G19,2.5 V,,,,,
+FPGA_LED_OUT[5],Output,PIN_G21,7,B7_N1,PIN_G21,2.5 V,,,,,
+FPGA_LED_OUT[4],Output,PIN_G22,7,B7_N2,PIN_G22,2.5 V,,,,,
+FPGA_LED_OUT[3],Output,PIN_G20,7,B7_N1,PIN_G20,2.5 V,,,,,
+FPGA_LED_OUT[2],Output,PIN_H21,7,B7_N2,PIN_H21,2.5 V,,,,,
+FPGA_LED_OUT[1],Output,PIN_E24,7,B7_N1,PIN_E24,2.5 V,,,,,
+FPGA_LED_OUT[0],Output,PIN_E25,7,B7_N1,PIN_E25,2.5 V,,,,,
+key[3],Input,PIN_R24,5,B5_N0,PIN_R24,2.5 V,,,,,
+key[2],Input,PIN_N21,6,B6_N2,PIN_N21,2.5 V,,,,,
+key[1],Input,PIN_M21,6,B6_N1,PIN_M21,2.5 V,,,,,
+key[0],Input,PIN_M23,6,B6_N2,PIN_M23,2.5 V,,,,,
+MIDI_IN_CLK,Input,PIN_AC22,4,B4_N0,PIN_AC22,2.5 V,,,,,
+MIDI_IN_DATA[7],Input,PIN_AF21,4,B4_N1,PIN_AF21,2.5 V,,,,,
+MIDI_IN_DATA[6],Input,PIN_AD21,4,B4_N0,PIN_AD21,2.5 V,,,,,
+MIDI_IN_DATA[5],Input,PIN_AD15,4,B4_N2,PIN_AD15,2.5 V,,,,,
+MIDI_IN_DATA[4],Input,PIN_AC19,4,B4_N0,PIN_AC19,2.5 V,,,,,
+MIDI_IN_DATA[3],Input,PIN_AD19,4,B4_N0,PIN_AD19,2.5 V,,,,,
+MIDI_IN_DATA[2],Input,PIN_AF24,4,B4_N1,PIN_AF24,2.5 V,,,,,
+MIDI_IN_DATA[1],Input,PIN_AF25,4,B4_N1,PIN_AF25,2.5 V,,,,,
+MIDI_IN_DATA[0],Input,PIN_AE22,4,B4_N0,PIN_AE22,2.5 V,,,,,
+MIDI_IN_RESET,Input,PIN_AE21,4,B4_N1,PIN_AE21,2.5 V,,,,,
+sw[9],Input,PIN_AB25,5,B5_N1,PIN_AB25,2.5 V,,,,,
+sw[8],Input,PIN_AC25,5,B5_N2,PIN_AC25,2.5 V,,,,,
+sw[7],Input,PIN_AB26,5,B5_N1,PIN_AB26,2.5 V,,,,,
+sw[6],Input,PIN_AD26,5,B5_N2,PIN_AD26,2.5 V,,,,,
+sw[5],Input,PIN_AC26,5,B5_N2,PIN_AC26,2.5 V,,,,,
+sw[4],Input,PIN_AB27,5,B5_N1,PIN_AB27,2.5 V,,,,,
+sw[3],Input,PIN_AD27,5,B5_N2,PIN_AD27,2.5 V,,,,,
+sw[2],Input,PIN_AC27,5,B5_N2,PIN_AC27,2.5 V,,,,,
+sw[1],Input,PIN_AC28,5,B5_N2,PIN_AC28,2.5 V,,,,,
+sw[0],Input,PIN_AB28,5,B5_N1,PIN_AB28,2.5 V,,,,,

@@ -1,3 +1,6 @@
+output_files/
+.qsys_edit/
+synthesis/
 *_generation_script*
 *.dat
 *_inst.vhd

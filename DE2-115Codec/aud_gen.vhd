@@ -11,6 +11,7 @@ port (
 	aud_dadat: out std_logic;
 	aud_data_in: in std_logic_vector(31 downto 0);
 	note_sample_ticks_in: in std_logic_vector(23 downto 0);
+	midi_note_in : in std_logic_vector(7 downto 0);
 	note_status_in: in std_logic
 );
 end aud_gen;

@@ -40,7 +40,7 @@ signal bitprsc: integer range 0 to 4:=0;
 signal aud_mono: std_logic_vector(31 downto 0):=(others=>'0');
 signal read_addr: integer range 0 to 240254:=0;
 signal ROM_ADDR: std_logic_vector(17 downto 0);
-signal ROM_OUT, ROM_OUT0, ROM_OUT1: std_logic_vector(15 downto 0);
+signal ROM_OUT, ROM_OUT0, ROM_OUT1, ROM_OUT2: std_logic_vector(15 downto 0);
 signal clock_12pll: std_logic;
 signal WM_i2c_busy: std_logic;
 signal WM_i2c_done: std_logic;
@@ -48,6 +48,8 @@ signal WM_i2c_send_flag: std_logic;
 signal WM_i2c_data: std_logic_vector(15 downto 0);
 signal DA_CLR: std_logic:='0';
 signal MIDI_BYTE_OUT: std_logic_vector(23 downto 0);
+signal CURRENT_MIDI_NOTE : std_logic_vector(7 downto 0);
+signal CURRENT_MIDI_STATUS : std_logic;
 signal NOTE_SAMPLE_TICKS_OUT: std_logic_vector(23 downto 0);
 
 
@@ -56,6 +58,7 @@ port (
 	clk_clk                         : in  std_logic                     := 'X';             -- clk
 	clock_12_clk                    : out std_logic;                                        -- clk
 	reset_reset_n                   : in  std_logic                     := 'X';             -- reset_n
+	-- onchip memory for sine wavetable
 	onchip_memory2_0_s1_address     : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
 	onchip_memory2_0_s1_debugaccess : in  std_logic                     := 'X';             -- debugaccess
 	onchip_memory2_0_s1_clken       : in  std_logic                     := 'X';             -- clken
@@ -64,7 +67,8 @@ port (
 	onchip_memory2_0_s1_readdata    : out std_logic_vector(15 downto 0);                    -- readdata
 	onchip_memory2_0_s1_writedata   : in  std_logic_vector(15 downto 0) := (others => 'X'); -- writedata
 	onchip_memory2_0_s1_byteenable  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- byteenable
-	onchip_memory2_0_reset1_reset   : in  std_logic                     := 'X';              -- reset
+	onchip_memory2_0_reset1_reset   : in  std_logic                     := 'X';             -- reset
+	-- onchip memory for cello wavetable
 	onchip_memory2_1_s1_address     : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
 	onchip_memory2_1_s1_debugaccess : in  std_logic                     := 'X';             -- debugaccess
 	onchip_memory2_1_s1_clken       : in  std_logic                     := 'X';             -- clken
@@ -73,7 +77,17 @@ port (
 	onchip_memory2_1_s1_readdata    : out std_logic_vector(15 downto 0);                    -- readdata
 	onchip_memory2_1_s1_writedata   : in  std_logic_vector(15 downto 0) := (others => 'X'); -- writedata
 	onchip_memory2_1_s1_byteenable  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- byteenable
-	onchip_memory2_1_reset1_reset   : in  std_logic                     := 'X'              -- reset	
+	onchip_memory2_1_reset1_reset   : in  std_logic                     := 'X';             -- reset	
+	-- onchip memory for sawtooth wavetable
+	onchip_memory2_2_s1_address     : in  std_logic_vector(17 downto 0) := (others => 'X'); -- address
+	onchip_memory2_2_s1_debugaccess : in  std_logic                     := 'X';             -- debugaccess
+	onchip_memory2_2_s1_clken       : in  std_logic                     := 'X';             -- clken
+	onchip_memory2_2_s1_chipselect  : in  std_logic                     := 'X';             -- chipselect
+	onchip_memory2_2_s1_write       : in  std_logic                     := 'X';             -- write
+	onchip_memory2_2_s1_readdata    : out std_logic_vector(15 downto 0);                    -- readdata
+	onchip_memory2_2_s1_writedata   : in  std_logic_vector(15 downto 0) := (others => 'X'); -- writedata
+	onchip_memory2_2_s1_byteenable  : in  std_logic_vector(1 downto 0)  := (others => 'X'); -- byteenable
+	onchip_memory2_2_reset1_reset   : in  std_logic                     := 'X'              -- reset	
 );
 end component pll;
 
@@ -85,6 +99,7 @@ component aud_gen is
 	aud_dadat: out std_logic;
 	aud_data_in: in std_logic_vector(31 downto 0);
 	note_sample_ticks_in: in std_logic_vector(23 downto 0);
+	midi_note_in : in std_logic_vector(7 downto 0);
 	note_status_in: in std_logic
  ); 
 end component aud_gen;
@@ -125,6 +140,7 @@ u0 : component pll
 					clk_clk       => clock_50,                                           -- clk.clk
 					reset_reset_n => '1',                                                -- reset.reset_n
 					clock_12_clk  => clock_12pll, 												   -- clock_12.clk
+					-- onchip memory for sine wavetable
 					onchip_memory2_0_s1_address     => ROM_ADDR,
 					onchip_memory2_0_s1_debugaccess =>'0',                               -- debugaccess
 					onchip_memory2_0_s1_clken       =>'1',                               -- clken
@@ -134,6 +150,7 @@ u0 : component pll
 					onchip_memory2_0_s1_writedata  =>(others=>'0'),
 					onchip_memory2_0_s1_byteenable  =>"11",
 					onchip_memory2_0_reset1_reset=>'0',
+					-- onchip memory for cello wavetable 
 					onchip_memory2_1_s1_address     => ROM_ADDR,
 					onchip_memory2_1_s1_debugaccess =>'0',                               -- debugaccess
 					onchip_memory2_1_s1_clken       =>'1',                               -- clken
@@ -142,7 +159,17 @@ u0 : component pll
 					onchip_memory2_1_s1_readdata   =>ROM_OUT1,                            -- readdata
 					onchip_memory2_1_s1_writedata  =>(others=>'0'),
 					onchip_memory2_1_s1_byteenable  =>"11",
-					onchip_memory2_1_reset1_reset=>'0'
+					onchip_memory2_1_reset1_reset=>'0',
+					-- onchip memory for sawtooth wavetable
+					onchip_memory2_2_s1_address     => ROM_ADDR,
+					onchip_memory2_2_s1_debugaccess =>'0',                               -- debugaccess
+					onchip_memory2_2_s1_clken       =>'1',                               -- clken
+					onchip_memory2_2_s1_chipselect  =>'1',                               -- chipselect
+					onchip_memory2_2_s1_write      =>'0',                                -- write
+					onchip_memory2_2_s1_readdata   =>ROM_OUT2,                            -- readdata
+					onchip_memory2_2_s1_writedata  =>(others=>'0'),
+					onchip_memory2_2_s1_byteenable  =>"11",
+					onchip_memory2_2_reset1_reset=>'0'
 				);
 
 sound: component aud_gen
@@ -153,6 +180,7 @@ sound: component aud_gen
 			aud_dadat => AUD_DACDAT,	
 			aud_data_in => aud_mono,
 			note_sample_ticks_in => NOTE_SAMPLE_TICKS_OUT,
+			midi_note_in => MIDI_BYTE_OUT(15 downto 8),
 			note_status_in => MIDI_BYTE_OUT(20)
 		);
 		
@@ -195,8 +223,11 @@ begin
 	clock_12 <= clock_12pll;
 	if rising_edge(clock_12pll)then
 		-- switch statement to set the wave table 
-		if(SW(7)='0' AND SW(6)='0' AND SW(5) = '1') then -- use the cello wave
+		if (SW(7)='0' AND SW(6)='0' AND SW(5) = '1') then -- use the cello wave
 			ROM_OUT <= ROM_OUT1;
+			NUM_SAMPLES := 255;
+		elsif (SW(7)='0' AND SW(6)='1' AND SW(5) = '0') -- use the sawtooth wave
+			ROM_OUT <= ROM_OUT2;
 			NUM_SAMPLES := 255;
 		else  -- use the sine wave
 			ROM_OUT <= ROM_OUT0;

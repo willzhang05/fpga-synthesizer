@@ -91,7 +91,7 @@
   <parameter name="enPRInitMode" value="false" />
   <parameter name="enableDiffWidth" value="false" />
   <parameter name="initMemContent" value="true" />
-  <parameter name="initializationFileName">C:/Users/annac/never.mif</parameter>
+  <parameter name="initializationFileName">D:/fpga-synthesizer/waves/sin.mif</parameter>
   <parameter name="instanceID" value="NONE" />
   <parameter name="memorySize" value="380508" />
   <parameter name="readDuringWriteMode" value="DONT_CARE" />

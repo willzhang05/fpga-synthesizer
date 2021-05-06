@@ -26,7 +26,9 @@ port (
 	MIDI_IN_CLK: in std_logic;
 	MIDI_IN_RESET: in std_logic;
 	
-	FPGA_LED_OUT : out std_logic_vector(23 downto 0)
+	FPGA_LED_OUT : out std_logic_vector(23 downto 0);
+	
+	clock_12 : out std_logic
 );
 
 end audio_codec;
@@ -72,7 +74,9 @@ component aud_gen is
 	aud_bk: out std_logic;
 	aud_dalr: out std_logic;
 	aud_dadat: out std_logic;
-	aud_data_in: in std_logic_vector(31 downto 0)
+	aud_data_in: in std_logic_vector(31 downto 0);
+	note_sample_ticks_in: in std_logic_vector(23 downto 0);
+	note_status_in: in std_logic
  ); 
 end component aud_gen;
 
@@ -107,42 +111,43 @@ component midiNoteNumberToSampleTicks is
 end component midiNoteNumberToSampleTicks;
 
 begin
- u0 : component pll
+u0 : component pll
         port map (
-            clk_clk       => clock_50,                                           -- clk.clk
-            reset_reset_n => '1',                                                -- reset.reset_n
-            clock_12_clk  => clock_12pll, 												   -- clock_12.clk
-				onchip_memory2_0_s1_address     => ROM_ADDR,
-            onchip_memory2_0_s1_debugaccess =>'0',                               -- debugaccess
-            onchip_memory2_0_s1_clken       =>'1',                               -- clken
-            onchip_memory2_0_s1_chipselect  =>'1',                               -- chipselect
-            onchip_memory2_0_s1_write      =>'0',                                -- write
-            onchip_memory2_0_s1_readdata   =>ROM_OUT,                            -- readdata
-            onchip_memory2_0_s1_writedata  =>(others=>'0'),
-            onchip_memory2_0_s1_byteenable  =>"11",
-				onchip_memory2_0_reset1_reset=>'0'
+					clk_clk       => clock_50,                                           -- clk.clk
+					reset_reset_n => '1',                                                -- reset.reset_n
+					clock_12_clk  => clock_12pll, 												   -- clock_12.clk
+					onchip_memory2_0_s1_address     => ROM_ADDR,
+					onchip_memory2_0_s1_debugaccess =>'0',                               -- debugaccess
+					onchip_memory2_0_s1_clken       =>'1',                               -- clken
+					onchip_memory2_0_s1_chipselect  =>'1',                               -- chipselect
+					onchip_memory2_0_s1_write      =>'0',                                -- write
+					onchip_memory2_0_s1_readdata   =>ROM_OUT,                            -- readdata
+					onchip_memory2_0_s1_writedata  =>(others=>'0'),
+					onchip_memory2_0_s1_byteenable  =>"11",
+					onchip_memory2_0_reset1_reset=>'0'
 				);
 
 sound: component aud_gen
 		port map(
-		aud_clock_12=>clock_12pll,
-		aud_bk=>AUD_BCLK,
-		aud_dalr=>DA_CLR,
-		aud_dadat=>AUD_DACDAT,	
-		aud_data_in=>aud_mono
-
+			aud_clock_12 => clock_12pll,
+			aud_bk => AUD_BCLK,
+			aud_dalr => DA_CLR,
+			aud_dadat => AUD_DACDAT,	
+			aud_data_in => aud_mono,
+			note_sample_ticks_in => NOTE_SAMPLE_TICKS_OUT,
+			note_status_in => MIDI_BYTE_OUT(20)
 		);
 		
 WM8731: component i2c 
 		port map(
-			i2c_busy=>WM_i2c_busy,
-			i2c_scl=>FPGA_I2C_SCLK,
-			i2c_send_flag=>WM_i2c_send_flag,
-			i2c_sda=>FPGA_I2C_SDAT,
-			i2c_addr=>"00110100",
-			i2c_done=>WM_i2c_done,
-			i2c_data=>WM_i2c_data,
-			i2c_clock_50=>clock_50	
+			i2c_busy => WM_i2c_busy,
+			i2c_scl => FPGA_I2C_SCLK,
+			i2c_send_flag => WM_i2c_send_flag,
+			i2c_sda => FPGA_I2C_SDAT,
+			i2c_addr => "00110100",
+			i2c_done => WM_i2c_done,
+			i2c_data => WM_i2c_data,
+			i2c_clock_50 => clock_50	
 		);
 
 reader: component midiByteRead 
@@ -166,33 +171,31 @@ AUD_DACLRCK<=DA_CLR;
 ROM_ADDR<=std_logic_vector(to_unsigned(read_addr,18));
 
 process (clock_12pll)
+	constant NUM_SAMPLES : NATURAL := 255;
 begin
+	clock_12 <= clock_12pll;
+	if rising_edge(clock_12pll)then
 
-if rising_edge(clock_12pll)then
-
- 	if (SW(8)='1') then--------reset
-		read_addr<=0;
-		bitprsc<=0;
-		aud_mono<=(others=>'0');
-	else
-		--LEDR(1)<=SW(7);
-		FPGA_LED_OUT <= MIDI_BYTE_OUT;
-		aud_mono(15 downto 0)<=ROM_OUT;----mono sound
-		aud_mono(31 downto 16)<=ROM_OUT;
-		if(DA_CLR='1')then
-			if(bitprsc<5)then----8ksps
-			bitprsc<=bitprsc+1;
-			else
+		if (SW(8)='1') then--------reset
+			read_addr<=0;
 			bitprsc<=0;
-				if(read_addr<240254)then
-				read_addr<=read_addr+1;
+			aud_mono<=(others=>'0');
+		else
+			--LEDR(1)<=SW(7);
+			FPGA_LED_OUT <= MIDI_BYTE_OUT;
+			aud_mono(15 downto 0)<=ROM_OUT;----mono sound
+			aud_mono(31 downto 16)<=ROM_OUT;
+			-- outputs a 190Hz signal with a 12 MHz clock 
+			if(DA_CLR='1')then
+				bitprsc<=0;
+				if(read_addr < NUM_SAMPLES) then
+					read_addr<=read_addr+1;
 				else
-				read_addr<=0;
+					read_addr<=0;
 				end if;
 			end if;
-		end if;
-	end if;	
-end if;
+		end if;	
+	end if;
 end process;	
 
 process (clock_50)

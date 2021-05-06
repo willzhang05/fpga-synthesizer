@@ -203,7 +203,7 @@
   <parameter name="slave2Latency" value="1" />
   <parameter name="useNonDefaultInitFile" value="true" />
   <parameter name="useShallowMemBlocks" value="false" />
-  <parameter name="writable" value="true" />
+  <parameter name="writable" value="false" />
  </module>
  <module name="pll_0" kind="altpll" version="18.1" enabled="1">
   <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone IV E" />

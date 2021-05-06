@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EnsembleReport name="pll" kind="pll" version="1.0" fabric="QSYS">
  <!-- Format version 18.1 625 (Future versions may contain additional information.) -->
- <!-- 2021.05.06.03:11:58 -->
+ <!-- 2021.05.06.03:19:59 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1620285117</value>
+  <value>1620285598</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -2212,7 +2212,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.WRITABLE</name>
-   <value>1</value>
+   <value>0</value>
   </assignment>
   <assignment>
    <name>embeddedsw.memoryInfo.DAT_SYM_INSTALL_DIR</name>
@@ -2428,7 +2428,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="writable">
    <type>boolean</type>
-   <value>true</value>
+   <value>false</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -2600,7 +2600,7 @@ parameters are a RESULT of the module parameters. -->
    </assignment>
    <assignment>
     <name>embeddedsw.configuration.isNonVolatileStorage</name>
-    <value>0</value>
+    <value>1</value>
    </assignment>
    <assignment>
     <name>embeddedsw.configuration.isPrintableDevice</name>
@@ -2760,7 +2760,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="isNonVolatileStorage">
     <type>boolean</type>
-    <value>false</value>
+    <value>true</value>
     <derived>false</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -2925,6 +2925,12 @@ parameters are a RESULT of the module parameters. -->
     <direction>Input</direction>
     <width>8</width>
     <role>address</role>
+   </port>
+   <port>
+    <name>debugaccess</name>
+    <direction>Input</direction>
+    <width>1</width>
+    <role>debugaccess</role>
    </port>
    <port>
     <name>clken</name>

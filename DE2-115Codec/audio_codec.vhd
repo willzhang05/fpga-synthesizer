@@ -226,7 +226,7 @@ begin
 		if (SW(7)='0' AND SW(6)='0' AND SW(5) = '1') then -- use the cello wave
 			ROM_OUT <= ROM_OUT1;
 			NUM_SAMPLES := 255;
-		elsif (SW(7)='0' AND SW(6)='1' AND SW(5) = '0') -- use the sawtooth wave
+		elsif (SW(7)='0' AND SW(6)='1' AND SW(5) = '0') then -- use the sawtooth wave
 			ROM_OUT <= ROM_OUT2;
 			NUM_SAMPLES := 255;
 		else  -- use the sine wave
